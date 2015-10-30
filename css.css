@@ -1,0 +1,20 @@
+/* 전체 적용 */
+body{height: 100%; overflow-y: scroll; margin:0 auto; width:1000px;}
+table, body{font-family:ng,AppleGothic,sans-serif;font-size:16px;color:#666}
+table{border-collapse:collapse}
+th {text-align: center; border:1px solid #e0e5e9; height:35px;border-width:1px 1px;font-weight:normal;background-color:#f8f9f9}
+td{border:0;border-top:1px solid #eff2f4;padding-left: 8px}
+h1{font-size: 35px; margin-top: 10px;}
+h3{font-size: 25px;}
+h5{font-size: 20px;}
+a{color: #666; text-decoration: none}
+a:hover{color: #ff5e93; text-decoration: underline;}
+
+/* api.php */
+#api_body {text-align: center; margin-top: 6%;}
+
+/* api_explanation.php */
+#right_back {text-align: right;  margin-top: 10px;}
+
+/* api_main.html */
+#main_body {text-align: center; margin-top: 6%;}
