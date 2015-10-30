@@ -32,7 +32,8 @@ $conn = db_connect();
 		set_error ( 4, $callback );
 	}
 
-	UPDATE booths SET idea_num = idea_num+1 WHERE id=1;
+	$query = "UPDATE booths SET idea_num = idea_num+1 WHERE id= ".$booth_id;
+	$conn->query($query);
 
 	// 5. JOSN 으로 만든다.
 	$result['err'] = 0;
