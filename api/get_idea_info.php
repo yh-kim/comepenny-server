@@ -11,6 +11,8 @@ if(isset($_REQUEST ['callback'])){
 }
 
 $idea_id = $_REQUEST ['idea_id']; //사용자가 넘겨준거
+$user_id = $_REQUEST ['user_id'];
+
 // 2. DB 접속
 
 $conn = db_connect();
@@ -29,9 +31,25 @@ if(!$cursor){
 
 $ret = db_result_to_array($cursor);
 
+$query ="SELECT *
+		FROM likes 
+		WHERE user_id = ".$user_id." AND idea_id=".$idea_id;
+
+$cursor = $conn -> query($query);
+
+if($cursor->fetch_assoc() != 0){
+	$like =1;
+}
+else{
+	$like =0;
+}
+
+
+
 // JSON 객체 만들자.
 
 $result['err'] = 0;
+$result['like'] = $like;
 $result['ret'] = $ret;
 
 
