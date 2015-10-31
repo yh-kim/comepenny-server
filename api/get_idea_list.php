@@ -21,7 +21,7 @@ $query ="SELECT content, hit, like_num, email
       INNER JOIN users 
       ON ideas.user_id = users.id
       WHERE booth_id= ".$booth_id. 
-      "limit ".$offset.",3";
+      "limit ".$offset.",6";
   }
 
 // 내 정보 눌렀을 때 like한 아이디어 받아오기
@@ -33,7 +33,7 @@ $query = "SELECT content, hit, like_num, email
       INNER JOIN likes
       ON likes.user_id=1
       WHERE ideas.id = likes.idea_id AND users.id = ideas.user_id
-      LIMIT ".$offset.",3";
+      LIMIT ".$offset.",6";
 }else{
 // 메인에서 인기순으로 아이디어 받아오기
 $query ="SELECT content, hit, like_num, email
@@ -41,7 +41,7 @@ $query ="SELECT content, hit, like_num, email
       INNER JOIN users 
       ON ideas.user_id = users.id
       ORDER BY like_num DESC 
-      limit ".$offset.",3";
+      limit ".$offset.",6";
   }
 
 // 2. DB 접속
@@ -60,6 +60,7 @@ $ret = db_result_to_array($cursor);
 // JSON 객체 만들자.
 
 $result['err'] = 0;
+$result['cnt'] = count($ret);
 $result['ret'] = $ret;
 
 
