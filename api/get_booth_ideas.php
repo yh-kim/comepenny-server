@@ -9,18 +9,47 @@ $callback = "";
 if(isset($_REQUEST ['callback'])){
 	$callback = $_REQUEST ['callback'];
 }
+$offset =  $_REQUEST['offset'];
+$offset = (int)$offset;
 
+// 부스 눌렀을 때 아이디어 받아오기
+if(isset($_REQUEST ['booth_id'])){
 $booth_id = $_REQUEST ['booth_id']; //사용자가 넘겨준거
+
+$query ="SELECT content, hit, user_id, like_num
+      FROM ideas
+      INNER JOIN users 
+      ON ideas.user_id = users.id
+      WHERE booth_id= ".$booth_id. 
+      "limit ".$offset.",3";
+
+// 내 정보 눌렀을 때 like한 아이디어 받아오기
+if(isset($_REQUEST ['user_id'])){
+$user_id = $_REQUEST ['user_id'];
+
+$query = "SELECT content, hit, ideas.user_id, like_num
+      FROM ideas
+      INNER JOIN likes 
+      ON likes.user_id= ".$user_id." 
+      WHERE ideas.id = likes.idea_id 
+      LIMIT ".$offset." ,3";
+
+}else{
+// 메인에서 인기순으로 아이디어 받아오기
+$query ="SELECT content, hit, user_id, like_num
+      FROM ideas
+      INNER JOIN users 
+      ON ideas.user_id = users.id
+      ORDER BY like_num DESC 
+      limit ".$offset.",3";
+  }
+
 // 2. DB 접속
 
 $conn = db_connect();
 
 // 4. DB에 저장된, 특정부스 리스트를 불러온다.
-$cursor = $conn->query(
-		"SELECT content, hit, user_id
-		FROM ideas
-		INNER JOIN users ON ideas.user_id = users.id
-		WHERE booth_id= ".$booth_id);
+$cursor = $conn->query($query);
 
 if(!$cursor){
 	set_error(4, $callback);
