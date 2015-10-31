@@ -23,8 +23,8 @@ if(!isset($user_id) || !isset($content)){
 $conn = db_connect();
 
 	// 4. DB 인서트
-	$query = "insert into `ideas` (user_id, booth_id, content, hit, date) values
-		(" . $user_id . ", '" . $booth_id . "', '".$content."'0, NOW() )";
+	$query = "insert into `ideas` (user_id, booth_id, content, hit, date, like_num) values
+		(" . $user_id . ", '" . $booth_id . "', '".$content."',0, NOW(),0 )";
 	
 	$conn->query ( $query );
 	
