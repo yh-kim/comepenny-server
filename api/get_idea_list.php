@@ -20,18 +20,18 @@ $query ="SELECT content, hit, like_num, email
       FROM ideas
       INNER JOIN users 
       ON ideas.user_id = users.id
-      WHERE booth_id= ".$booth_id. 
-      "limit ".$offset.",6";
+      WHERE booth_id= ".$booth_id." 
+      LIMIT ".$offset.",6";
   }
 
 // 내 정보 눌렀을 때 like한 아이디어 받아오기
-if(isset($_REQUEST ['user_id'])){
+else if(isset($_REQUEST ['user_id'])){
 $user_id = $_REQUEST ['user_id'];
 
 $query = "SELECT content, hit, like_num, email
       FROM ideas, users
       INNER JOIN likes
-      ON likes.user_id=1
+      ON likes.user_id=".$user_id."
       WHERE ideas.id = likes.idea_id AND users.id = ideas.user_id
       LIMIT ".$offset.",6";
 }else{
