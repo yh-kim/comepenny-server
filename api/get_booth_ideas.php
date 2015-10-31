@@ -16,7 +16,7 @@ $offset = (int)$offset;
 if(isset($_REQUEST ['booth_id'])){
 $booth_id = $_REQUEST ['booth_id']; //사용자가 넘겨준거
 
-$query ="SELECT content, hit, user_id, like_num
+$query ="SELECT content, hit, ideas.user_id, like_num
       FROM ideas
       INNER JOIN users 
       ON ideas.user_id = users.id
@@ -27,16 +27,15 @@ $query ="SELECT content, hit, user_id, like_num
 if(isset($_REQUEST ['user_id'])){
 $user_id = $_REQUEST ['user_id'];
 
-$query = "SELECT content, hit, ideas.user_id, like_num
-      FROM ideas
-      INNER JOIN likes 
-      ON likes.user_id= ".$user_id." 
-      WHERE ideas.id = likes.idea_id 
-      LIMIT ".$offset." ,3";
-
+$query = "SELECT ideas.content, ideas.hit, ideas.like_num, users.email
+      FROM ideas, users
+      INNER JOIN likes
+      ON likes.user_id=1
+      WHERE ideas.id = likes.idea_id AND users.id = ideas.user_id
+      LIMIT ".$offset.",3";
 }else{
 // 메인에서 인기순으로 아이디어 받아오기
-$query ="SELECT content, hit, user_id, like_num
+$query ="SELECT content, hit, ideas.user_id, like_num
       FROM ideas
       INNER JOIN users 
       ON ideas.user_id = users.id
@@ -60,8 +59,7 @@ $ret = db_result_to_array($cursor);
 // JSON 객체 만들자.
 
 $result['err'] = 0;
-$result['cnt'] = count($ret);
-$result['ret'] =  $ret;
+$result['ret'] = $ret;
 
 
 // 6. 전송
