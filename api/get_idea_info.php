@@ -50,7 +50,10 @@ else{
 
 $result['err'] = 0;
 $result['like'] = $like;
-$result['ret'] = $ret;
+$result['name'] = $ret[0]['name'];
+$result['content'] =  $ret[0]['content'];
+$result['hit'] = $ret[0]['hit'];
+$result['like_num'] = $ret[0]['like_num'];
 
 
 // 6. 전송
