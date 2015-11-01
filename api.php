@@ -34,7 +34,7 @@ if($cursor->num_rows == 0){
 		<br><br><br>
 		
 		<table border="0px" cellpadding="20px" cellspacing="0px">
-	
+
 			<colgroup>
 				<col width="140px"/>
 				<col width="360px"/>
