@@ -31,13 +31,15 @@ $conn = db_connect();
 	if ($conn->affected_rows != 1) {
 		set_error ( 4, $callback );
 	}
+	$id = mysqli_insert_id($conn);
 
 	$query = "UPDATE booths SET idea_num = idea_num+1 WHERE id= ".$booth_id;
 	$conn->query($query);
 
 	// 5. JOSN 으로 만든다.
 	$result['err'] = 0;
-	//$result['content'] = $ret[0]['content'];
+	// insert한 idea_id
+	$result['idea_id'] = $id;
 	
 	// 6. 전송
 	if($callback){
