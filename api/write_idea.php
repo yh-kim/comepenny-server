@@ -33,6 +33,7 @@ $conn = db_connect();
 	}
 	$id = mysqli_insert_id($conn);
 
+	// 부스의 idea_num값 올리기
 	$query = "UPDATE booths SET idea_num = idea_num+1 WHERE id= ".$booth_id;
 	$conn->query($query);
 

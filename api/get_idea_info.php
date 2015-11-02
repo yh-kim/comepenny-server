@@ -44,6 +44,10 @@ else{
 	$like =0;
 }
 
+	// 아이디어 디테일 누르면 hit 증가
+	$query = "UPDATE ideas SET hit = hit+1 WHERE id= ".$idea_id;
+	$conn->query($query);
+
 
 
 // JSON 객체 만들자.
