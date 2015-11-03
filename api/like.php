@@ -39,16 +39,29 @@ if($is_like==1)
 // 좋아요 삭제하면 like_num 감소
 if($is_like==1)
 {
-	$query = "UPDATE ideas SET like_num = like_num-1 WHERE id= ".$idea_id.;
+	$query = "UPDATE ideas SET like_num = like_num-1 WHERE id= ".$idea_id;
 }else{ //좋아요 추가하면 like_num 증가
-	$query = "UPDATE ideas SET like_num = like_num+1 WHERE id= ".$idea_id.;
+	$query = "UPDATE ideas SET like_num = like_num+1 WHERE id= ".$idea_id;
 }
 
 $conn->query($query);
 
+//  아이디어의 like수 받아오기
+$cursor = $conn->query(
+		"SELECT like_num
+		FROM ideas
+		WHERE id = ".$idea_id);
+
+if(!$cursor){
+	set_error(4, $callback);
+}
+
+$ret = db_result_to_array($cursor);
+
 	// 5. JOSN 으로 만든다.
 	
 	$result['err'] = 0;
+	$result['like_num'] = $ret[0]['like_num'];
 
 	
 	// 6. 전송

@@ -17,6 +17,10 @@ $user_id = $_REQUEST ['user_id'];
 
 $conn = db_connect();
 
+// 아이디어 디테일 누르면 hit 증가
+$query = "UPDATE ideas SET hit = hit+1 WHERE id= ".$idea_id;
+$conn->query($query);
+
 // 4. DB에 저장된, 특정부스 리스트를 불러온다.
 $cursor = $conn->query(
 		"SELECT booths.name, ideas.content, ideas.hit, ideas.like_num
@@ -44,9 +48,7 @@ else{
 	$like =0;
 }
 
-	// 아이디어 디테일 누르면 hit 증가
-	$query = "UPDATE ideas SET hit = hit+1 WHERE id= ".$idea_id;
-	$conn->query($query);
+
 
 
 
