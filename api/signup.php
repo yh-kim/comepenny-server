@@ -34,9 +34,13 @@ if($cursor->num_rows != 0){
 	$cursor->close();
 	set_error(3, $callback);
 }
+
+// 한국시간
+date_default_timezone_set("Asia/Seoul");
+
 // 4.DB에 INSERT
 
-$query = "insert into `users` (email,passwd,reg_date) values ( '".$email. "', '" .sha1($passwd.$salt1)."',NOW())";
+$query = "insert into `users` (email,passwd,reg_date) values ( '".$email. "', '" .sha1($passwd.$salt1)."','".date("Y-m-d H:i:s")."')";
 $conn->query($query);
 if($conn->affected_rows != 1){//insert로 영향받은 행수
 	set_error(4, $callback);

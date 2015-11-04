@@ -19,13 +19,16 @@ if(!isset($idea_id) ||!isset($user_id) || !isset($comment)){
 }
 
 // 1.2 해당 유저가 회원이냐.
-// 2. DB 접속
 
+// 한국시간
+date_default_timezone_set("Asia/Seoul");
+
+// 2. DB 접속
 $conn = db_connect();
 
 	// 4. DB 인서트
 	$query = "insert into `comments` (idea_id, user_id, comment, date) values
-		(" . $idea_id . ",'" .$user_id. "','".$comment."', NOW())";
+		(" . $idea_id . ",'" .$user_id. "','".$comment."', '".date("Y-m-d H:i:s")."')";
 	
 	$conn->query ( $query );
 	

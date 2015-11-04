@@ -18,13 +18,16 @@ if(!isset($user_id) || !isset($content)){
 }
 
 // 1.2 해당 유저가 회원이냐.
-// 2. DB 접속
 
+// 한국시간
+date_default_timezone_set("Asia/Seoul");
+
+// 2. DB 접속
 $conn = db_connect();
 
 	// 4. DB 인서트
 	$query = "insert into `ideas` (user_id, booth_id, content, hit, date, like_num) values
-		(" . $user_id . ", '" . $booth_id . "', '".$content."',0, NOW(),0 )";
+		(" . $user_id . ", '" . $booth_id . "', '".$content."',0,'".date("Y-m-d H:i:s")."',0 )";
 	
 	$conn->query ( $query );
 	
