@@ -21,6 +21,7 @@ $query ="SELECT ideas.id, content, hit, like_num, email
       INNER JOIN users 
       ON ideas.user_id = users.id
       WHERE booth_id= ".$booth_id." 
+      ORDER BY ideas.id DESC
       LIMIT ".$offset.",6";
   }
 
@@ -36,12 +37,22 @@ $query = "SELECT ideas.id, content, hit, like_num, email
       LIMIT ".$offset.",6";
 }else{
 // 메인에서 인기순으로 아이디어 받아오기
+  /*
 $query ="SELECT ideas.id, content, hit, like_num, email
       FROM ideas
       INNER JOIN users 
       ON ideas.user_id = users.id
       ORDER BY like_num DESC 
       limit ".$offset.",6";
+  }
+  */
+//메인에서 관리자가 선택한 아이디어 받아오기
+$query = "SELECT ideas.id, content, hit, like_num, email
+      FROM ideas, users
+      INNER JOIN likes
+      ON likes.user_id=0
+      WHERE ideas.id = likes.idea_id AND users.id = ideas.user_id
+      LIMIT ".$offset.",6";
   }
 
 // 2. DB 접속

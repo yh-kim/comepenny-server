@@ -10,14 +10,27 @@ if(isset($_REQUEST ['callback'])){
 	$callback = $_REQUEST ['callback'];
 }
 
+//관리자가 선택한 부스들 받아오기
+if(isset($_REQUEST ['booth_is_main'])){
+$booth_is_main = $_REQUEST ['booth_is_main']; //사용자가 넘겨준거
+
+$query ="SELECT id, idea_num, like_num
+      FROM booths
+      WHERE is_main= 1";
+  }
+
+// 카테고리 탭에서 부스들 받아오기
+else {
+$query ="SELECT id, idea_num, like_num
+      FROM booths";
+  }
+
 // 2. DB 접속
 
 $conn = db_connect();
 
 // 4. DB에 저장된, 부스 리스트를 불러온다.
-$cursor = $conn->query(
-		"select id, idea_num, like_num 
-		from booths");
+$cursor = $conn->query($query);
 
 if(!$cursor){
 	set_error(4, $callback);
