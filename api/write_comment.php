@@ -40,9 +40,18 @@ $conn = db_connect();
 	$query = "UPDATE ideas SET comment_num = comment_num+1 WHERE id= ".$idea_id;
 	$conn->query($query);
 
+	// comment_num 가져오기
+	$cursor = $conn->query(
+		"SELECT comment_num
+		FROM ideas
+		WHERE id =".$idea_id);
+
+	$ret = db_result_to_array($cursor);
+
 	// 5. JOSN 으로 만든다.
 	
 	$result['err'] = 0;
+	$result['comment_num'] = $ret[0]['comment_num'];
 	
 	// 6. 전송
 	if($callback){

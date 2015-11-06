@@ -20,7 +20,7 @@ $query ="SELECT comment, email, `date`
       INNER JOIN users 
       ON comments.idea_id = ".$idea_id." 
       WHERE comments.user_id= users.id
-      ORDER BY `date` DESC
+      ORDER BY `date` ASC
       LIMIT ".$offset.",6";
 
 // 2. DB 접속
