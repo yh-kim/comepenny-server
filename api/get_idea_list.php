@@ -27,15 +27,27 @@ $query ="SELECT ideas.id, content, hit, like_num, email, comment_num
 
 // 내 정보 눌렀을 때 like한 아이디어 받아오기
 else if(isset($_REQUEST ['user_id'])){
+
 $user_id = $_REQUEST ['user_id'];
 
-$query = "SELECT ideas.id, content, hit, like_num, email, comment_num
+  if(isset($_REQUEST ['is_like']))
+  {
+      $query = "SELECT ideas.id, content, hit, like_num, email, comment_num
       FROM ideas, users
       INNER JOIN likes
       ON likes.user_id=".$user_id."
       WHERE ideas.id = likes.idea_id AND users.id = ideas.user_id
       LIMIT ".$offset.",6";
-}else{
+    }
+    //내 정보 눌렀을 때 내가 쓴 아이디어 
+  else 
+  {
+    $query = "SELECT ideas.id, content, hit, like_num, email, comment_num
+      FROM ideas, users
+      WHERE ideas.user_id = ".$user_id." AND users.id = ideas.user_id
+      LIMIT ".$offset.",6";
+  }
+}
 // 메인에서 인기순으로 아이디어 받아오기
   /*
 $query ="SELECT ideas.id, content, hit, like_num, email, comment_num
@@ -46,6 +58,9 @@ $query ="SELECT ideas.id, content, hit, like_num, email, comment_num
       limit ".$offset.",6";
   }
   */
+
+else{
+
 //메인에서 관리자가 선택한 아이디어 받아오기
 $query = "SELECT ideas.id, content, hit, like_num, email, comment_num
       FROM ideas, users
