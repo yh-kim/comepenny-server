@@ -26,8 +26,8 @@ date_default_timezone_set("Asia/Seoul");
 $conn = db_connect();
 
 	// 4. DB 인서트
-	$query = "insert into `ideas` (user_id, booth_id, content, hit, date, like_num) values
-		(" . $user_id . ", '" . $booth_id . "', '".$content."',0,'".date("Y-m-d H:i:s")."',0 )";
+	$query = "insert into `ideas` (user_id, booth_id, content, hit, date, like_num,comment_num) values
+		(" . $user_id . ", '" . $booth_id . "', '".$content."',0,'".date("Y-m-d H:i:s")."',0,0)";
 	
 	$conn->query ( $query );
 	

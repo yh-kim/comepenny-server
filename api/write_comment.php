@@ -36,6 +36,10 @@ $conn = db_connect();
 		set_error ( 4, $callback );
 	}
 
+	// 아이디어의의 comment_num값 올리기
+	$query = "UPDATE ideas SET comment_num = comment_num+1 WHERE id= ".$idea_id;
+	$conn->query($query);
+
 	// 5. JOSN 으로 만든다.
 	
 	$result['err'] = 0;

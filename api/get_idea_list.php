@@ -16,7 +16,7 @@ $offset = (int)$offset;
 if(isset($_REQUEST ['booth_id'])){
 $booth_id = $_REQUEST ['booth_id']; //사용자가 넘겨준거
 
-$query ="SELECT ideas.id, content, hit, like_num, email
+$query ="SELECT ideas.id, content, hit, like_num, email, comment_num
       FROM ideas
       INNER JOIN users 
       ON ideas.user_id = users.id
@@ -29,7 +29,7 @@ $query ="SELECT ideas.id, content, hit, like_num, email
 else if(isset($_REQUEST ['user_id'])){
 $user_id = $_REQUEST ['user_id'];
 
-$query = "SELECT ideas.id, content, hit, like_num, email
+$query = "SELECT ideas.id, content, hit, like_num, email, comment_num
       FROM ideas, users
       INNER JOIN likes
       ON likes.user_id=".$user_id."
@@ -38,7 +38,7 @@ $query = "SELECT ideas.id, content, hit, like_num, email
 }else{
 // 메인에서 인기순으로 아이디어 받아오기
   /*
-$query ="SELECT ideas.id, content, hit, like_num, email
+$query ="SELECT ideas.id, content, hit, like_num, email, comment_num
       FROM ideas
       INNER JOIN users 
       ON ideas.user_id = users.id
@@ -47,7 +47,7 @@ $query ="SELECT ideas.id, content, hit, like_num, email
   }
   */
 //메인에서 관리자가 선택한 아이디어 받아오기
-$query = "SELECT ideas.id, content, hit, like_num, email
+$query = "SELECT ideas.id, content, hit, like_num, email, comment_num
       FROM ideas, users
       INNER JOIN likes
       ON likes.user_id=0
