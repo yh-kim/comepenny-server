@@ -14,14 +14,14 @@ if(isset($_REQUEST ['callback'])){
 if(isset($_REQUEST ['booth_is_main'])){
 $booth_is_main = $_REQUEST ['booth_is_main']; //사용자가 넘겨준거
 
-$query ="SELECT id, idea_num, like_num
+$query ="SELECT id, idea_num, like_num, name
       FROM booths
       WHERE is_main= 1";
   }
 
 // 카테고리 탭에서 부스들 받아오기
 else {
-$query ="SELECT id, idea_num, like_num
+$query ="SELECT id, idea_num, like_num, name
       FROM booths";
   }
 

@@ -22,6 +22,7 @@ $conn = db_connect();
 
 	// 4. DB 인서트
 	$query = "UPDATE booths SET idea_num = idea_num-1 WHERE id= (SELECT booth_id FROM ideas WHERE id = ".$idea_id.")";
+	$conn->query($query);
 
 
 
