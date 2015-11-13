@@ -15,7 +15,7 @@ $offset = (int)$offset;
 // 아이디어 눌렀을 때 댓글 불러오기
 $idea_id = $_REQUEST ['idea_id']; //사용자가 넘겨준거
 
-$query ="SELECT comment, email, `date`
+$query ="SELECT comments.id,comment, email, `date`
       FROM comments
       INNER JOIN users 
       ON comments.idea_id = ".$idea_id." 

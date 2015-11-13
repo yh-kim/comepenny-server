@@ -23,6 +23,7 @@ $conn = db_connect();
 	// 4. DB 인서트
 	$query = "UPDATE ideas SET comment_num = comment_num-1 WHERE id= (SELECT idea_id FROM comments WHERE id = ".$comment_id.")";
 
+	$conn->query($query);
 
 
 	$query = "DELETE FROM `comments` 
