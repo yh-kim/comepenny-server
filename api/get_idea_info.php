@@ -23,7 +23,7 @@ $conn->query($query);
 
 // 4. DB에 저장된, 특정부스 리스트를 불러온다.
 $cursor = $conn->query(
-		"SELECT booths.name,ideas.user_id, ideas.content, ideas.hit, ideas.like_num, ideas.date, ideas.comment_num
+		"SELECT booths.name,ideas.user_id, ideas.booth_id, ideas.content, ideas.hit, ideas.like_num, ideas.date, ideas.comment_num
 		FROM ideas
 		INNER JOIN booths 
 		ON ideas.id = ".$idea_id ." 
@@ -56,6 +56,7 @@ else{
 
 $result['err'] = 0;
 $result['like'] = $like;
+$result['booth_id'] = $ret[0]['booth_id'];
 $result['name'] = $ret[0]['name'];
 $result['user_id'] = $ret[0]['user_id'];
 $result['content'] =  $ret[0]['content'];

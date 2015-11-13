@@ -11,6 +11,7 @@ use Aws\Common\Exception\MultipartUploadException;
 use Aws\S3\Model\MultipartUpload\UploadBuilder;
 use Aws\S3\S3Client;
 use Aws\S3\Exception\S3Exception;
+	use Aws\Common\Enum\Region;
 
 
 // 1.쿼리 파라미터 (리퀘스트) 처리
@@ -58,9 +59,16 @@ $bucket = "comepenny";
 try{
 	// Instantiate an S3 client
 	$s3 = S3Client::factory(array(
+			'bucket'=>$bucket,
 			'key'=>'AKIAJHVBHV3AHXPTPDKA',
 			'secret'=>'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',
-	));
+
+			// 'key'=>'AKIAI76T7M3DBXFB5OZA',
+			// 'secret'=>'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',
+			 // 'region'=>Region::US_WEST_2
+			// 'region'=>'eu-west-1'
+			// 'region'=>'eu-US_WEST_2-1'
+   		 ));
 	
 	
 	// 버킷 생성할 때만 사용. 이미 웹 콘솔에서 생성한 경우는 사용할 필요 없다.
@@ -187,8 +195,9 @@ if($_FILES['img']['tmp_name']){
 	// DB 에 정보 저장.
 	
 	// 4. DB 인서트
-	$query = "insert into users (image_o, image_t) values
-		(".$keyname_o."', '".$keyname_t."')";
+	$query = "update users set `image_o` = '".$keyname_o."'  , `image_t` = '".$keyname_t."' 
+	where id = ".$user_id ;
+
 	
 	$conn->query ( $query );
 	
@@ -209,16 +218,3 @@ if($_FILES['img']['tmp_name']){
 
 
 ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
