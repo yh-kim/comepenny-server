@@ -9,7 +9,7 @@ if(isset($_REQUEST ['callback'])){
 	$callback = $_REQUEST ['callback'];
 }
 $idea_id = $_REQUEST['idea_id'];
-$content = $_REQUEST['content'];
+$content = $_POST['content'];
 
 // 1.1 validation check
 if(!isset($idea_id) || !isset($content)){

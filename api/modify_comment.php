@@ -9,7 +9,7 @@ if(isset($_REQUEST ['callback'])){
 	$callback = $_REQUEST ['callback'];
 }
 $comment_id = $_REQUEST['comment_id'];
-$comment = $_REQUEST['comment'];
+$comment = $_POST['comment'];
 
 // 1.1 validation check
 if(!isset($comment_id) || !isset($comment)){

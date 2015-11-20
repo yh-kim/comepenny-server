@@ -11,7 +11,7 @@ if(isset($_REQUEST ['callback'])){
 
 $idea_id = $_REQUEST['idea_id'];
 $user_id = $_REQUEST['user_id'];
-$comment = $_REQUEST['comment'];
+$comment = $_POST['comment'];
 
 // 1.1 validation check
 if(!isset($idea_id) ||!isset($user_id) || !isset($comment)){

@@ -13,8 +13,8 @@ if(isset($_REQUEST ['callback'])){
 	$callback = $_REQUEST ['callback'];
 }
 //---------------------------------------------------------------------
-$email = $_REQUEST ['email'];
-$passwd = $_REQUEST ['passwd'];
+$email = $_POST ['email'];
+$passwd = $_POST ['passwd'];
 
 if (!isset( $email ) || !isset( $passwd )) {
 	set_error ( 1, $callback );

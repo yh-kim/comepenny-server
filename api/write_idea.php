@@ -8,9 +8,10 @@ $callback = "";
 if(isset($_REQUEST ['callback'])){
 	$callback = $_REQUEST ['callback'];
 }
+
 $user_id = $_REQUEST['user_id'];
 $booth_id = $_REQUEST['booth_id'];
-$content = $_REQUEST['content'];
+$content = $_POST['content'];
 
 // 1.1 validation check
 if(!isset($user_id) || !isset($content)){
@@ -36,7 +37,6 @@ function filter($nameasdferwer){
 	// $nameasdferwer = mysql_real_escape_string($nameasdferwer, $sql_con);
 	return $nameasdferwer;
 }
-
 	// 4. DB 인서트
 	$query = sprintf("insert into `ideas` (user_id, booth_id, content, hit, date, like_num,comment_num) values
 		(" . $user_id . ", '" . $booth_id . "', '".'%s'."',0,'".date("Y-m-d H:i:s")."',0,0)"
