@@ -6,11 +6,8 @@ require_once ($doc_root . '/engine/SimpleImage.php');
 
 require '/var/www/html/aws/aws-sdk-php/vendor/autoload.php';
 
-
-use Aws\Common\Exception\MultipartUploadException;
-use Aws\S3\Model\MultipartUpload\UploadBuilder;
-use Aws\S3\S3Client;
-use Aws\S3\Exception\S3Exception;
+use Aws\S3\MultipartUploader;
+use Aws\Exception\MultipartUploadException;
 
 
 // 1.쿼리 파라미터 (리퀘스트) 처리
@@ -51,6 +48,10 @@ if($cursor->num_rows == 0){
 	set_error(3, $callback);
 }
 
+$uploadfile = $uploaddir . basename($_FILES['img']['tmp_name']);
+
+
+$uploader = new MultipartUploader($s3Client, )
 
 
 // 2.  S3 접속
@@ -58,15 +59,10 @@ $bucket = "comepenny";
 try{
 	// Instantiate an S3 client
 	$s3 = S3Client::factory(array(
-			'bucket'=>$bucket,
+			'version' => '2006-03-01',
 			'key'=>'AKIAJHVBHV3AHXPTPDKA',
 			'secret'=>'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',
-
-			// 'key'=>'AKIAI76T7M3DBXFB5OZA',
-			// 'secret'=>'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',
-			 // 'region'=>Region::US_WEST_2
-			// 'region'=>'eu-west-1'
-			// 'region'=>'eu-US_WEST_2-1'
+			 'region' => 'ap-northeast-1'
    		 ));
 	
 	
@@ -114,7 +110,7 @@ if($_FILES['img']['tmp_name']){
 
 		// Upload a publicly accessible file. File size, file type, and md5 hash are automatically calculated by the SDK
 
-		$uploader = UploadBuilder::newInstance()
+		$uploader = MultipartUploader::newInstance()
 		->setClient($s3)
 		->setSource(fopen($uploadfile, 'r'))
 		->setBucket($bucket)
@@ -133,7 +129,7 @@ if($_FILES['img']['tmp_name']){
 
 
 
-	} catch(MultipartUploadException $e){
+	} catch(S3Exception $e){
 		//print_r($e);
 		set_error(22, $callback);
 	}
@@ -183,7 +179,7 @@ if($_FILES['img']['tmp_name']){
 		//$list = $s3->listObjects(array(
 		// 'Bucket' => $bucket
 		//));
-	} catch(MultipartUploadException $e){
+	} catch(S3Exception $e){
 		//print_r($e);
 		set_error(23, $callback);
 	}

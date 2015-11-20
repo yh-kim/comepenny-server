@@ -37,6 +37,7 @@ $user_id = $_REQUEST ['user_id'];
       INNER JOIN likes
       ON likes.user_id=".$user_id."
       WHERE ideas.id = likes.idea_id AND users.id = ideas.user_id
+      ORDER BY ideas.id DESC
       LIMIT ".$offset.",6";
     }
     //내 정보 눌렀을 때 내가 쓴 아이디어 
@@ -45,6 +46,7 @@ $user_id = $_REQUEST ['user_id'];
     $query = "SELECT ideas.id, ideas.booth_id, content, hit, like_num, email, comment_num
       FROM ideas, users
       WHERE ideas.user_id = ".$user_id." AND users.id = ideas.user_id
+      ORDER BY ideas.id DESC
       LIMIT ".$offset.",6";
   }
 }
@@ -59,6 +61,28 @@ $query ="SELECT ideas.id, ideas.booth_id, content, hit, like_num, email, comment
   }
   */
 
+  // 관리자가 최신순으로 볼 때
+else if(isset($_REQUEST ['master'])){
+  $query ="SELECT ideas.id, ideas.booth_id, content, hit, like_num, email, comment_num
+      FROM ideas
+      INNER JOIN users 
+      ON ideas.user_id = users.id
+      ORDER BY ideas.id DESC 
+      limit ".$offset.",6";
+}
+
+// 관리자가 새로고침
+else if(isset($_REQUEST ['refresh_id'])){
+
+$refresh_id = $_REQUEST ['refresh_id'];
+  $query ="SELECT ideas.id, ideas.booth_id, content, hit, like_num, email, comment_num
+      FROM ideas
+      INNER JOIN users 
+      ON ideas.user_id = users.id
+      WHERE ideas.id > ".$refresh_id."
+      ORDER BY ideas.id ASC";
+}
+
 else{
 
 //메인에서 관리자가 선택한 아이디어 받아오기
@@ -67,6 +91,7 @@ $query = "SELECT ideas.id, ideas.booth_id, content, hit, like_num, email, commen
       INNER JOIN likes
       ON likes.user_id=0
       WHERE ideas.id = likes.idea_id AND users.id = ideas.user_id
+      ORDER BY likes.like_date DESC
       LIMIT ".$offset.",6";
   }
 

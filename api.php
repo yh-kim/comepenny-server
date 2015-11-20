@@ -39,10 +39,10 @@ if($cursor->num_rows == 0){
 		<table border="0px" cellpadding="20px" cellspacing="0px">
 
 			<colgroup>
-				<col width="140px"/>
-				<col width="360px"/>
-				<col width="140px"/>
-				<col width="360px"/>
+				<col width="160px"/>
+				<col width="340px"/>
+				<col width="160px"/>
+				<col width="340px"/>
 			</colgroup>
 			<tbody>
 				<?php 

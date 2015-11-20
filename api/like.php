@@ -24,13 +24,16 @@ if(!isset($user_id) ||!isset($idea_id) || !isset($is_like)){
 
 $conn = db_connect();
 
+// 한국시간
+date_default_timezone_set("Asia/Seoul");
+
 //좋아요 삭제
 if($is_like==1)
 {
 	$query = "DELETE FROM likes where user_id=".$user_id." AND idea_id =".$idea_id;
 }else{ //좋아요 추가
-	$query = "insert into `likes` (user_id, idea_id) 
-	values (" . $user_id . "," .$idea_id.")";
+	$query = "insert into `likes` (user_id, idea_id, like_date) 
+	values (" . $user_id . "," .$idea_id.",'".date("Y-m-d H:i:s")."')";
 }
 
 	// 4. DB 인서트

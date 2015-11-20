@@ -33,6 +33,12 @@ if(!$cursor){
 	set_error(4, $callback);
 }
 
+// 4-1. 없으면 에러코드.
+if($cursor->num_rows == 0){
+	$cursor->close();
+	set_error(5, $callback);
+}
+
 $ret = db_result_to_array($cursor);
 
 $query ="SELECT *
