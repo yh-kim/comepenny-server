@@ -20,6 +20,9 @@ $passwd = $_POST ['passwd'];
 if (!isset( $email ) || !isset( $passwd )) {
 	set_error ( 1, $callback );
 }
+
+
+
 // 2.DB 접속
 $conn = db_connect();
 // 3.이름이 DB 에 있는지 없는지
@@ -40,7 +43,11 @@ date_default_timezone_set("Asia/Seoul");
 
 // 4.DB에 INSERT
 
-$query = "insert into `users` (email,passwd,reg_date) values ( '".$email. "', '" .sha1($passwd.$salt1)."','".date("Y-m-d H:i:s")."')";
+$query = "insert into `users` (email,passwd,reg_date) values 
+		( '".$email. "', 
+		'" .sha1($passwd.$salt1)."',
+		'".date("Y-m-d H:i:s")."')";
+
 $conn->query($query);
 if($conn->affected_rows != 1){//insert로 영향받은 행수
 	set_error(4, $callback);

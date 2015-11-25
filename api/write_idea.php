@@ -27,19 +27,9 @@ date_default_timezone_set("Asia/Seoul");
 $conn = db_connect();
 
 
-
-// 필터링작업
-function filter($nameasdferwer){
-	// $nameasdferwer = htmlspecialchars($nameasdferwer);
-	// $nameasdferwer = strip_tags($nameasdferwer);
-	$nameasdferwer = addslashes($nameasdferwer);
-	// $nameasdferwer = stripslashes($nameasdferwer);
-	// $nameasdferwer = mysql_real_escape_string($nameasdferwer, $sql_con);
-	return $nameasdferwer;
-}
-	// 4. DB 인서트
-	$query = sprintf("insert into `ideas` (user_id, booth_id, content, hit, date, like_num,comment_num) values
-		(" . $user_id . ", '" . $booth_id . "', '".'%s'."',0,'".date("Y-m-d H:i:s")."',0,0)"
+// 4. DB 인서트
+$query = sprintf("insert into `ideas` (user_id, booth_id, content, hit, date, like_num,comment_num) values
+		(" . $user_id . ", '" . $booth_id . "', '%s',0,'".date("Y-m-d H:i:s")."',0,0)"
 		,filter($content)
 		);
 	

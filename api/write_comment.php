@@ -27,8 +27,13 @@ date_default_timezone_set("Asia/Seoul");
 $conn = db_connect();
 
 	// 4. DB 인서트
-	$query = "insert into `comments` (idea_id, user_id, comment, date) values
-		(" . $idea_id . ",'" .$user_id. "','".$comment."', '".date("Y-m-d H:i:s")."')";
+	// $query = "insert into `comments` (idea_id, user_id, comment, date) values
+	// 	(" . $idea_id . ",'" .$user_id. "','".$comment."', '".date("Y-m-d H:i:s")."')";
+
+	$query = sprintf("insert into `comments` (idea_id, user_id, comment, date) values
+		(" . $idea_id . ",'" .$user_id. "','%s', '".date("Y-m-d H:i:s")."')"
+		,filter($comment)
+		);
 	
 	$conn->query ( $query );
 	

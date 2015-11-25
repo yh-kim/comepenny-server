@@ -25,9 +25,15 @@ date_default_timezone_set("Asia/Seoul");
 $conn = db_connect();
 
 	// 4. DB 인서트
-	$query = "UPDATE comments 
-			  SET comment = '".$comment."'     
-			  WHERE id = ".$comment_id;
+	// $query = "UPDATE comments 
+	// 		  SET comment = '".$comment."'     
+	// 		  WHERE id = ".$comment_id;
+
+	$query = sprintf("UPDATE comments 
+			  SET comment = '%s'     
+			  WHERE id = ".$comment_id
+		,filter($comment)
+		);
 	
 	$conn->query ( $query );
 	

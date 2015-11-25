@@ -16,7 +16,15 @@ echo json_encode($result);
 exit;
 }
 
-
+// 필터링작업
+function filter($nameasdferwer){
+	// $nameasdferwer = htmlspecialchars($nameasdferwer);
+	// $nameasdferwer = strip_tags($nameasdferwer);
+	$nameasdferwer = addslashes($nameasdferwer);
+	// $nameasdferwer = stripslashes($nameasdferwer);
+	// $nameasdferwer = mysql_real_escape_string($nameasdferwer, $sql_con);
+	return $nameasdferwer;
+}
 
 
 

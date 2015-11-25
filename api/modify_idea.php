@@ -25,9 +25,15 @@ date_default_timezone_set("Asia/Seoul");
 $conn = db_connect();
 
 	// 4. DB 인서트
-	$query = "UPDATE ideas 
-			  SET content = '".$content."'     
-			  WHERE id = ".$idea_id;
+	// $query = "UPDATE ideas 
+	// 		  SET content = '".$content."'     
+	// 		  WHERE id = ".$idea_id;
+
+	$query = sprintf("UPDATE ideas 
+			  SET content = '%s'     
+			  WHERE id = ".$idea_id
+		,filter($content)
+		);
 	
 	$conn->query ( $query );
 	
