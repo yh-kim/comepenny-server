@@ -20,9 +20,19 @@ if(!isset($user_id)){
 
 $conn = db_connect();
 
-	// 4. DB 인서트
-	$query = "UPDATE users SET image_o = null, image_t = null WHERE id=".$user_id;
+if(isset($_REQUEST ['gcm_id'])){
+$gcm_id = $_REQUEST['gcm_id'];
+// gcm_id 등록할 때
+	$query = "UPDATE `users` SET `gcm_id` = '".$gcm_id."' WHERE `id` =".$user_id;
+}
+else{
+//  로그아웃할 때 gcm_id 삭제
+	$query = "UPDATE `users` SET `gcm_id` = NULL WHERE `id` =".$user_id;
+}
+
+	
 	$conn->query($query);
+
 
 	// 5. JOSN 으로 만든다.
 	$result['err'] = 0;
